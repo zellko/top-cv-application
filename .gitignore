@@ -22,3 +22,10 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+/src/components/GeneralIntro copy.js
+/src/components/GeneralLink copy.js
+/src/components/General copy.js
+/src/components/General.js
+/src/styles/General.css
+/src/App copy.js

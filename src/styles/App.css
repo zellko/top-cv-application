@@ -1,0 +1,42 @@
+.App{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    max-width: 210mm;
+}
+
+.App > div{
+    width: 100%;
+}
+
+.App-header{
+    padding: 32px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.App-cv{
+    background-color: var(--bg-color);
+    height: 100%;
+    box-shadow: 0 0 3px 1px #fff;
+    padding: 32px;
+}
+
+.general{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+
+/*
+    A4 Sheet
+    height: 297mm;
+    width: 210mm;
+*/

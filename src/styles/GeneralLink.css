@@ -1,0 +1,39 @@
+.general-link{
+    flex: 1;
+}
+
+.general-link ul{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.general-link li{
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 0;
+}
+
+.general-link li img{
+    height: 24px;
+}
+
+ul li:hover{
+    cursor: pointer;
+}
+
+
+li > *:hover:not(div):before{
+    content: '';
+    background: url(../img/pencil.png);
+    background-size: 16px;
+    height: 16px;
+    width: 16px;
+    position: absolute;
+    left: -16px;
+}
