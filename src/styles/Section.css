@@ -1,0 +1,7 @@
+.section{
+    border-top: 2px solid var(--grey);
+    border-bottom: 2px solid var(--grey);
+    text-align: center;
+    color: var(--blue);
+    margin-top: 32px;
+}

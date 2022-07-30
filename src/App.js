@@ -2,6 +2,7 @@ import './styles/App.css';
 import React from 'react';
 import { GeneralIntro } from './components/GeneralIntro';
 import { GeneralLink } from './components/GeneralLink';
+import { Section } from './components/Section';
 
 class App extends React.Component {
 	constructor(props) {
@@ -137,6 +138,7 @@ class App extends React.Component {
 						<GeneralIntro  generalState={ this.state.generalIntro } onFieldClick={ this.openEditField } onSaveClick={ this.hideEditField } onInput={ this.modifyState }/>
 						<GeneralLink  generalState={ this.state.generalLink } onFieldClick={ this.openEditField } onSaveClick={ this.hideEditField } onInput={ this.modifyState }/>
 					</div>
+					<Section sectionName="Skills" />
 	  		</div>
 	  	</div>
 	  );
