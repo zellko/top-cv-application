@@ -3,6 +3,7 @@ import React from 'react';
 import { GeneralIntro } from './components/GeneralIntro';
 import { GeneralLink } from './components/GeneralLink';
 import { Section } from './components/Section';
+import { Skills } from './components/Skills';
 
 class App extends React.Component {
 	constructor(props) {
@@ -11,7 +12,8 @@ class App extends React.Component {
 		this.openEditField = this.openEditField.bind(this);
 		this.hideEditField = this.hideEditField.bind(this);
 		this.modifyState = this.modifyState.bind(this);
-		
+		this.saveNewSkill = this.saveNewSkill.bind(this);
+		this.openSkillsEditField = this.openSkillsEditField.bind(this);
 		// Create a state object with some default values...
 		// ... State object properties store text value for every section of the CV (Intro, link, work experience, ...).
 		// ... Each properties is an array with [textValue, EditStatus, defaultValue]
@@ -32,6 +34,7 @@ class App extends React.Component {
 				location: ['New York, USA', false, 'City, Country'],
 				git: ['johndoe', false, 'johndoe'],
 			},
+			skills: [['Web Dev', 'CAD'], false],
 		};
 	}
 
@@ -52,9 +55,9 @@ class App extends React.Component {
 				location: [this.state.generalLink.location[0], false, 'City, Country'],
 				git: [this.state.generalLink.git[0], false, 'johndoe'],
 			},
+			skills: [this.state.skills[0], false],
 		  });
 	};
-
 
 	openEditField(e){
 		// Function to "mark" a text field has being edited
@@ -97,7 +100,7 @@ class App extends React.Component {
 		// Get the field values [Text, EditStatus, defaultValue] from state object.
 		let fieldState = [...this.state[fieldSection][fieldName]];
 
-		if (value.trim()){
+		if (value){
 			// Update state object with new value entered by the user
 			fieldState[0] = value;
 
@@ -120,6 +123,55 @@ class App extends React.Component {
 			}));
 		};
 	};
+
+	openSkillsEditField(){
+		// Function to "mark" a skill list has being edited
+		// ... It's called when user click on the "+" button.
+
+		// If any another field is being modified, stop editing it (text field are modified one by one). 
+		this.hideEditField();
+
+		let prevSkillsList = [...this.state.skills]; // Get a copy of skills array from the state variable
+		prevSkillsList[1] = true; // Set the edit status as true to show edit input field
+
+		//Update state object
+		this.setState({
+			skills: prevSkillsList,
+		});
+	};
+
+
+	saveNewSkill(){
+		// Function to add a new skill to the skills section
+		
+		// Get the new skill from the input field.
+		const input = document.querySelector('[field-input="skills"]');
+		const value = input.value.trim();
+		
+		const fieldSection = input.getAttribute('section');  // Get section of the CV being modified
+		if (fieldSection !== 'skills') return; 
+
+		let prevSkillsList = [...this.state.skills]; // Get a copy of skills array from the state variable
+
+		if (value){
+			prevSkillsList[0].push(value); // Update the copy array with the new value
+			prevSkillsList[1] = false; // Set the edit status as false to remove the edit input field
+
+			//Update state object with new value entered by the user.
+			this.setState({
+				skills: prevSkillsList,
+			});
+		
+		} else {
+			//If input field is empty, Set the edit status as false to remove the edit input field.
+			prevSkillsList[1] = false;
+
+			this.setState({
+				skills: prevSkillsList,
+			});
+		};
+	};
+
 	render(){	
 
 	  return (
@@ -139,6 +191,7 @@ class App extends React.Component {
 						<GeneralLink  generalState={ this.state.generalLink } onFieldClick={ this.openEditField } onSaveClick={ this.hideEditField } onInput={ this.modifyState }/>
 					</div>
 					<Section sectionName="Skills" />
+					<Skills skillsList = {this.state.skills} onSaveClick={ this.saveNewSkill }  onAddTask = { this.openSkillsEditField } />
 	  		</div>
 	  	</div>
 	  );
