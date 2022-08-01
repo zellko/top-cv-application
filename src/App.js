@@ -5,6 +5,7 @@ import { GeneralLink } from './components/GeneralLink';
 import { Section } from './components/Section';
 import { Skills } from './components/Skills';
 import { WorkExperience } from './components/WorkExperience';
+import { Education } from './components/Education';
 
 class App extends React.Component {
 	constructor(props) {
@@ -35,6 +36,12 @@ class App extends React.Component {
 					prevObject[workExpNumber][fieldName][1] = true; // Set the edit status as true to show edit input field
 					break;
 
+				case 'education':
+					const educationNumber = e.target.getAttribute('educationid'); // Get ID of work experience to be modified
+
+					prevObject= [...this.state.education]; // Get a copy of work experience array from the state variable
+					prevObject[educationNumber][fieldName][1] = true; // Set the edit status as true to show edit input field
+					break;
 				case 'skills':
 					prevObject = [...this.state.skills]; // Get a copy of skills array from the state variable
 					prevObject[1] = true; // Set the edit status as true to show edit input field
@@ -67,7 +74,7 @@ class App extends React.Component {
 					prevGeneralLink[key][1] = false;
 				}
 
-				let prevWorkExp= [...this.state.workExperiences]; // Get a copy of workExperiences array from the state variable
+				let prevWorkExp = [...this.state.workExperiences]; // Get a copy of workExperiences array from the state variable
 				// Set editStatus has false to hide editField on the DOM.
 				for (const n in prevWorkExp) {
 					prevWorkExp[n].jobTitle[1] = false;
@@ -77,12 +84,21 @@ class App extends React.Component {
 					prevWorkExp[n].tasks[1] = false;
 				}
 
+				let prevEducation = [...this.state.education]; // Get a copy of workExperiences array from the state variable
+				// Set editStatus has false to hide editField on the DOM.
+				for (const n in prevEducation) {
+					prevEducation[n].eduTitle[1] = false;
+					prevEducation[n].school[1] = false;
+					prevEducation[n].date[1] = false;
+				}
+
 				// Update state object
 				this.setState({
 					generalIntro: prevGeneralIntro,
 					generalLink: prevGeneralLink,
 					skills: [this.state.skills[0], false],
 					workExperiences: prevWorkExp,
+					education: prevEducation,
 				});
 			};
 	
@@ -115,7 +131,18 @@ class App extends React.Component {
 					break;
 
 				case 'education':
-					/* TODO */
+					const sectionid = input.getAttribute('educationid'); // Get ID of work experience to being modified
+
+					prevObject= [...this.state.education]; // Get a copy of work experience object from the state variable
+
+					if (value){
+						// If a value is entered, update state object copy with new value entered by the user
+						prevObject[sectionid][fieldName][0] = value;
+
+					} else {
+						// else (input is empty), show the default value
+						prevObject[sectionid][fieldName][0] = prevObject[sectionid][fieldName][2];
+					};	
 					break;
 
 				default: // For General Intro / General Link section: 
@@ -270,8 +297,47 @@ class App extends React.Component {
 					workExperiences: prevWorkExp,
 				});
 			};
-			
+
 			return { saveTask, deleteTask };
+		})();
+
+		this.education = (() => {
+			// Method to add or delete an "education" box from the "Education" section of the CV.
+	
+			const addEducation = () =>{
+
+				const defaultEducation = {
+					eduTitle: ['School Title', false, 'School Title'],
+					school: ['School Name', false, 'School Name'],
+					date: ['Schooling date', false, 'Schooling date'],
+				};
+
+				let prevEducation= [...this.state.education]; // Get a copy of education array from the state variable
+		
+				prevEducation.push(defaultEducation); // Add default education object to the copy array. 
+		
+				// Update state object using modified copy
+				this.setState({
+					education: prevEducation,
+				});
+			};
+		
+			const deleteEducation = (e) =>{
+		
+				// Get ID of the work experience to be deleted
+				const sectionid = e.target.getAttribute('educationid');
+		
+				let prevEducation= [...this.state.education]; // Get a copy of education array from the state variable
+		
+				prevEducation.splice(sectionid, 1); // Remove default education object to the copy array. 
+		
+				// Update state object using modified copy
+				this.setState({
+					education: prevEducation,
+				});
+			};
+
+			return { addEducation, deleteEducation };
 		})();
 		
 		// Create a state object with some default values...
@@ -309,6 +375,16 @@ class App extends React.Component {
 				tasks: [['Task3', 'Task4'], false],
 			},
 			],
+			education: [{
+				eduTitle: ['Bachelor of Engineering', false, 'School Title'],
+				school: ['National School of Engineering, Chicago', false, 'School Name'],
+				date: ['2014 - 2015', false, 'Schooling date'],
+			}, {
+				eduTitle: ['Car Mechanician', false, 'School Title'],
+				school: ['Mechanical School of Chicago', false, 'School Name'],
+				date: ['2011 - 2014', false, 'Schooling date'],
+			},
+			],
 		};
 	}
 
@@ -338,6 +414,11 @@ class App extends React.Component {
 						onFieldClick={ this.editField.show } onSaveClick={ this.editField.hide } onInput={ this.editField.save }
 						onAddWorkExperience={ this.workExperience.addWorkExperience } onDeleteWorkExperience={ this.workExperience.deleteWorkExperience }
 						onEditTask={ this.editField.show } onDeleteTask={ this.task.deleteTask } onSaveTask={ this.task.saveTask }
+					/>
+					<Section sectionName="Education" />
+					<Education educationList={this.state.education}
+						onFieldClick={ this.editField.show } onSaveClick={ this.editField.hide } onInput={ this.editField.save } 
+						onAddEducation={ this.education.addEducation } onDeleteEducation={ this.education.deleteEducation }
 					/>
 	  		</div>
 	  	</div>

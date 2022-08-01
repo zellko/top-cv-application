@@ -50,7 +50,7 @@ class WorkExperience extends React.Component{
 								}							
 								{ renderAddTaskButton(workExperienceIndex) }
 							</ul>
-							<button onClick={this.props.onDeleteWorkExperience}>✕</button>
+							<button workid={ workExperienceIndex } onClick={this.props.onDeleteWorkExperience}>✕</button>
 						</div>);
 					}
 				})

@@ -2,9 +2,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
+    height: 100%;
     width: 100%;
     max-width: 210mm;
+    padding-bottom: 32px;
 }
 
 .App > div{
@@ -25,6 +27,7 @@
     height: 100%;
     box-shadow: 0 0 3px 1px #fff;
     padding: 32px;
+    flex: 1;
 }
 
 .general-container{
