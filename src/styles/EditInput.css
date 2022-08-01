@@ -6,19 +6,19 @@
 
 .edit-input  :nth-child(1){
     padding: 4px;
-    margin: 4px 0;
 }
 
-.edit-input  button{
+.edit-input button{
     background-color: var(--button-color);
     color: #fff;
     font-weight: 700;
     font-size: .9rem;
     border: 0;
-    padding: 4px 12px;
+    border-radius: 4px;
+    padding: 6px 12px;
 }
 
-.edit-input  button:hover{
+.edit-input button:hover{
     cursor: pointer;
     background-color: var(--button-color-hover);
 

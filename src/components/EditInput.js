@@ -30,9 +30,9 @@ class EditInput extends React.Component{
 				let textValue = this.props.value;
 				textValue = textValue.replace(/\s+/g, ' ').trim();
 
-				return <textarea field-input={this.props.field} section={this.props.section} rows="4" cols="50" defaultValue={textValue} onChange={this.props.onInputChange}></textarea>;
+				return <textarea field-input={this.props.field} section={this.props.section} workid={this.props.workid} rows="4" cols="50" defaultValue={textValue} onChange={this.props.onInputChange}></textarea>;
 			} else {
-				return <input field-input={this.props.field} section={this.props.section} defaultValue={this.props.value} onChange={this.props.onInputChange}></input>;
+				return <input field-input={this.props.field} section={this.props.section} workid={this.props.workid} defaultValue={this.props.value} onChange={this.props.onInputChange}></input>;
 			}
 		};
 		

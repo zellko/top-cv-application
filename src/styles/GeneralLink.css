@@ -23,12 +23,11 @@
     height: 24px;
 }
 
-ul li:hover{
+.general-link ul li:hover{
     cursor: pointer;
 }
 
-
-li > *:hover:not(div):before{
+.general-link li > *:hover:not(div):before{
     content: '';
     background: url(../img/pencil.png);
     background-size: 16px;
