@@ -171,8 +171,6 @@ class App extends React.Component {
 			// Method to save or delete a skill from the "Skills" section of the CV.
 	
 			const saveSkill = () =>{
-				// Function to add a new skill to the skills section
-		
 				// Get the new skill from the input field.
 				const input = document.querySelector('[field-input="skills"]');
 				const value = input.value.trim();
@@ -198,8 +196,18 @@ class App extends React.Component {
 				});
 			};
 	
-			const deleteSkill = (e) =>{
-				/* TO DO */
+			const deleteSkill = (e) =>{			
+				// Get ID of the skill to be deleted
+				const skillId = e.target.getAttribute('skillid'); // Get ID of the work experience
+	
+				let prevSkills = [...this.state.skills]; // Get a copy of skill array from the state variable
+	
+				prevSkills[0].splice(skillId, 1); // Remove task for the copy array
+	
+				// Update state object using modified copy
+				this.setState({
+					skills: prevSkills,
+				});
 
 			};
 
@@ -408,7 +416,10 @@ class App extends React.Component {
 							onFieldClick={ this.editField.show } onSaveClick={ this.editField.hide } onInput={ this.editField.save }/>
 					</div>
 					<Section sectionName="Skills" />
-					<Skills skillsList = {this.state.skills} onSaveClick={ this.skill.saveSkill }  onAddTask = { this.editField.show } />
+					<Skills skillsList = {this.state.skills} 
+						onSaveClick={ this.skill.saveSkill } 
+						onDeleteSkill={ this.skill.deleteSkill } 
+						onAddSkill = { this.editField.show } />
 					<Section sectionName="Work Experience" />
 					<WorkExperience worksList={this.state.workExperiences} 
 						onFieldClick={ this.editField.show } onSaveClick={ this.editField.hide } onInput={ this.editField.save }

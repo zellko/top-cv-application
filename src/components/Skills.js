@@ -21,7 +21,7 @@ class Skills extends React.Component{
 		  if (addSkill) {
 				return <EditInput field='skills' section="skills" onButtonClicked={this.props.onSaveClick} />;
 			} else {
-		  		return <button  section="skills" onClick={this.props.onAddTask}>✚</button>;
+		  		return <button  section="skills" onClick={this.props.onAddSkill}>✚</button>;
 		  }
 		};
 
@@ -31,6 +31,7 @@ class Skills extends React.Component{
 					return (
 						<div key={index.toString()} className="skills">
 							<p p-id={`${index}`}> { task } </p>
+							<button skillid = { index } onClick={this.props.onDeleteSkill}>✕</button>
 						</div>);
 				})
 				}

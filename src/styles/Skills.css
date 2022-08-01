@@ -4,6 +4,21 @@
     gap: 16px;
 }
 
+.skills-container > button{
+    background-color: var(--button-color);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1rem;
+    border: 0;
+    border-radius: 4px;
+    padding: 6px 12px;
+}
+
+.skills-container > button:hover{
+    cursor: pointer;
+    background-color: var(--button-color-hover);
+}
+
 .skills{
     padding: 6px 16px;
     background-color: var(--blue);
@@ -14,17 +29,20 @@
     justify-content: center;
 }
 
-.skills-container button{
-    background-color: var(--button-color);
-    color: #fff;
-    font-weight: 700;
-    font-size: .9rem;
+.skills > button{
+    display: none;
+    background: 0;
     border: 0;
-    border-radius: 4px;
-    padding: 6px 12px;
+    color: rgb(255, 145, 145);
+    font-size: 1rem;
+    padding: 0 0 0 16px;
 }
 
-.skills-container button:hover{
+.skills:hover > button{
+    display: flex;
     cursor: pointer;
-    background-color: var(--button-color-hover);
 }
+
+.skills > button:hover {
+    color: red;
+} 
