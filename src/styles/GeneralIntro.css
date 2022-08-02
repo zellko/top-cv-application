@@ -20,19 +20,19 @@
     position: absolute;
 }
 
-.general-intro h1{
+.general-intro [field="name"]{
     color: var(--blue);
     font-weight: 500;
     font-size: 2.3rem;
 }
 
-.general-intro h4{
+.general-intro [field="job"]{
     color: var(--grey);
     font-weight: 300;
     font-size: 1.3rem;
 }
 
-.general-intro p{
+.general-intro [field="desc"]{
     padding: 8px 0;
     font-size: 1rem;
 }
