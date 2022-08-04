@@ -1,5 +1,6 @@
 import './styles/App.css';
 import React from 'react';
+import { Header } from './components/Header';
 import { GeneralIntro } from './components/GeneralIntro';
 import { GeneralLink } from './components/GeneralLink';
 import { Section } from './components/Section';
@@ -26,6 +27,10 @@ class App extends React.Component {
 
 				const fieldSection = e.target.getAttribute('section'); // Get section of the CV being modified
 				const fieldName = e.target.getAttribute('field'); // Get name of field being modified
+				const iseditable = e.target.getAttribute('iseditable'); // Get name of field being modified
+
+				if(iseditable === 'false') return;
+
 				let prevObject;
 				
 				switch (fieldSection) {
@@ -347,6 +352,54 @@ class App extends React.Component {
 
 			return { addEducation, deleteEducation };
 		})();
+
+		this.mode = (()=>{
+			// Toggle between "Edit mode" and "Preview mode"
+
+			const preview = async () => {
+				// Switch to preview mode, fields are not editable and buttons are hidden
+
+				await this.editField.hide(); // If an edit field is open, hide it (await is needed to correctly apply attribute changes to the field)
+		
+				// Make the field not editable (also remove CSS :hover effect)
+				const editableField = document.querySelectorAll('[iseditable]');
+				editableField.forEach(field => {
+					field.setAttribute('iseditable', 'false');
+				});
+
+				// Hide all the "+" buttons
+				const buttons = document.querySelectorAll('button');
+				buttons.forEach(button => {
+					button.classList.add('hide');
+				});
+				
+				// Make the slider switch from "Edit CV" to "Preview CV"
+				const slider = document.querySelector('.btn-slider');
+				slider.classList.add('slider-active');
+			};
+
+			const edit = () => {
+				// Switch to edit mode
+
+				// Make the field editable (also allow CSS :hover effect)
+				const editableField = document.querySelectorAll('[iseditable]');
+				editableField.forEach(field => {
+					field.setAttribute('iseditable', 'true');
+				});
+
+				// Show all the "+" buttons back
+				const buttons = document.querySelectorAll('button');
+				buttons.forEach(button => {
+					button.classList.remove('hide');
+				});
+				
+				// Make the slider switch from "Preview CV" to "Edit CV"
+				const slider = document.querySelector('.btn-slider');
+				slider.classList.remove('slider-active');
+			};
+
+			return {preview, edit};
+		})();
 		
 		// Create a state object with some default values...
 		// ... State object properties store text value for every section of the CV (Intro, link, work experience, ...).
@@ -396,18 +449,38 @@ class App extends React.Component {
 		};
 	}
 
+	componentDidMount(){
+		// If App component mount...
+
+		const root = document.querySelector('#root'); // Get root element
+
+		root.addEventListener('keydown', (e => {
+			// When user is editing a field, if he press enter, the field is validated. 
+			if (e.key === 'Enter') {
+				const input = document.querySelector('[field-input]');
+				const fieldName = input.getAttribute('field-input'); // Get name of field being modified
+
+				switch (fieldName) {
+				case 'skills':
+					this.skill.saveSkill();
+					break;
+				case 'tasks':
+					this.task.saveTask();
+					break;
+				default:
+					this.editField.hide();
+					break;
+				}
+			};
+
+			e.stopImmediatePropagation();
+		}));
+	};
+
 	render(){	
 	  return (
 	  	<div className="App">
-	  		<div className="App-header">
-					{/* NOTE: DRAFT HEADER */}
-	  			<h2>CV React</h2>
-					<h3>Instruction:</h3>
-					<ul>
-						<li> Click on fields to edit them! </li>
-						<li> Save your CV in PDF using "Save CV" Button </li>
-					</ul>
-	  		</div>
+			  	<Header onPreviewClick= { this.mode.preview } onEditClick= { this.mode.edit }/>
 				<div className="App-cv">
 					<div className="general-container">
 						<GeneralIntro  generalState={ this.state.generalIntro } 

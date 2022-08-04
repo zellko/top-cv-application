@@ -3,6 +3,10 @@
     flex-direction: column;
 }
 
+.work-container > div:last-of-type{
+    margin: 0;
+}
+
 .work-date-location{
     font-size: 0.9rem;
     font-style: italic;
@@ -23,6 +27,7 @@
     border-radius: 4px;
     padding: 6px 12px;
     width: 100%;
+    margin-top: 24px;
 }
 
 .work-container > button:hover{
@@ -55,7 +60,7 @@
     font-weight: 300;
 }
 
- .work *:not(ul):not(li):hover{
+ .work *:not(ul):not(li):not(div):not([iseditable="false"]):hover{
     cursor: pointer;
 }
 
@@ -71,7 +76,7 @@
     width: max-content;
 }
 
-.work *:hover:not(button):not(ul):not(li):not(div)::after{
+.work *:hover:not(button):not(ul):not(li):not(div):not([iseditable="false"])::after{
     content: '';
     background: url(../img/pencil.png);
     background-size: 16px;

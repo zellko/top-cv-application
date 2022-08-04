@@ -7,11 +7,11 @@
     text-align: justify;
 }
 
-.general-intro > *:hover{
+.general-intro > *:not([iseditable="false"]):hover{
     cursor: pointer;
 }
 
-.general-intro > *:hover:not(div)::after{
+.general-intro > *:hover:not(div):not([iseditable="false"]):after{
     content: '';
     background: url(../img/pencil.png);
     background-size: 16px;

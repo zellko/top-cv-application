@@ -1,0 +1,49 @@
+.App-header{
+    padding: 16px;
+    color: #fff;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr min-content min-content 1fr;
+    align-items: center;
+}
+
+.App-header h2{
+    border-bottom: 1px solid var(--white);
+    width: 40%;
+    text-align: center;
+    justify-self: center;
+    padding: 8px;
+}
+.App-header .btn-edit-preview{
+    justify-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--white);
+    border: 1px solid var(--white);
+    margin-top: 16px;
+    position: relative;
+}
+
+.btn-preview, 
+.btn-edit{
+    text-align: center;
+    width: 112px;
+    z-index: 1;
+    cursor: pointer;
+    padding: 8px;
+}
+
+.btn-slider{
+    position: absolute;
+    left: 0;
+    background-color: var(--blue);
+    height: 100%;
+    width: 50%;
+    z-index: 0;
+    transition: all 0.3s ease-in-out;
+}
+
+.slider-active{
+    left: 50%;
+}

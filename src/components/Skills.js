@@ -29,7 +29,7 @@ class Skills extends React.Component{
 			<div className="skills-container">
 				{ this.props.skillsList[0].map( (task, index) => {
 					return (
-						<div key={index.toString()} className="skills">
+						<div key={index.toString()} className="skills" iseditable='true'>
 							<p p-id={`${index}`}> { task } </p>
 							<button skillid = { index } onClick={this.props.onDeleteSkill}>✕</button>
 						</div>);

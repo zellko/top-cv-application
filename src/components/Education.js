@@ -13,7 +13,7 @@ class Education extends React.Component{
 		    if (isEdit) {
 				return <EditInput field={ field } section="education" educationid={ n } value={ workObject[field][0] } onButtonClicked={this.props.onSaveClick}  onInputChange={this.props.onInput} />;
 			} else {
-		  		return <p className='iseditable' field={ field } section="education" educationid={ n }  onClick={this.props.onFieldClick}> { workObject[field][0] } </p>;
+		  		return <p iseditable='true' field={ field } section="education" educationid={ n }  onClick={this.props.onFieldClick}> { workObject[field][0] } </p>;
 		  }
 		};
 

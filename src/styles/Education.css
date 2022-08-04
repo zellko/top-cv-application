@@ -3,6 +3,10 @@
     flex-direction: column;
 }
 
+.education-container > div:last-of-type{
+    margin: 0;
+}
+
 .education-container > button{
     background-color: var(--button-color);
     color: #fff;
@@ -12,6 +16,7 @@
     border-radius: 4px;
     padding: 6px 12px;
     width: 100%;
+    margin-top: 24px;
 }
 
 .education-container > button:hover{
@@ -50,7 +55,7 @@
     color: var(--grey);
 }
 
-.education *:hover:not(button):not(div)::after{
+.education *:hover:not(button):not(div):not([iseditable="false"])::after{
     content: '';
     background: url(../img/pencil.png);
     background-size: 16px;
@@ -59,7 +64,7 @@
     position: absolute;
 }
 
-.education *:hover{
+.education *:not([iseditable="false"]):hover{
     cursor: pointer;
 }
 
