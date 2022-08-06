@@ -35,7 +35,15 @@
     background-color: var(--button-color-hover);
 }
 
-.work-container ul > button{
+.work{
+    position: relative;
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.work ul > button{
     background-color: var(--button-color);
     color: #fff;
     font-weight: 700;
@@ -45,7 +53,7 @@
     padding: 2px 4px;
 }
 
-.work-container ul > button:hover{
+.work ul > button:hover{
     cursor: pointer;
     background-color: var(--button-color-hover);
 }
@@ -60,19 +68,8 @@
     font-weight: 300;
 }
 
- .work *:not(ul):not(li):not(div):not([iseditable="false"]):hover{
+.work *:not(ul):not(li):not(div):not([iseditable="false"]):hover{
     cursor: pointer;
-}
-
-.work{
-    position: relative;
-    margin-bottom: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.work li{
     width: max-content;
 }
 
@@ -91,7 +88,7 @@
     border: 0;
     color: red;
     font-size: .9rem;
-    padding: 2px;
+    margin: 2px 8px;
 }
 
 .work li:hover > button{
@@ -112,7 +109,6 @@
     border: 0;
     color: red;
     font-size: 1.3rem;
-    padding: 2px;
 }
 
 .work:hover > button{

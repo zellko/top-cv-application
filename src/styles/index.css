@@ -5,6 +5,7 @@
 
 :root{
   --blue: #346799;
+  --blue-clear: #7ab9f8;
   --grey: #656565;
   --white: #fff;
   --bg-color: #fff;
@@ -26,7 +27,6 @@ body {
   display: flex;
   justify-content: center;
 }
-
 
 .hide{
   display: none;

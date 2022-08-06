@@ -230,7 +230,7 @@ class App extends React.Component {
 					company: ['Company Name', false, 'Company Name'],
 					date: ['Working date', false, 'Working date'],
 					location: ['City, Country', false, 'City, Country'],
-					tasks: [['Main Task 1', 'Main task 2'], false],
+					tasks: [['Main Task 1', 'Main Task 2'], false],
 				};
 
 				let prevWorkExp= [...this.state.workExperiences]; // Get a copy of workExperience array from the state variable
@@ -320,7 +320,7 @@ class App extends React.Component {
 			const addEducation = () =>{
 
 				const defaultEducation = {
-					eduTitle: ['School Title', false, 'School Title'],
+					eduTitle: ['School Title', false, 'Diploma Title'],
 					school: ['School Name', false, 'School Name'],
 					date: ['Schooling date', false, 'Schooling date'],
 				};
@@ -410,10 +410,10 @@ class App extends React.Component {
 		this.state = {
 			generalIntro: {
 				name: ['John doe', false, 'Full Name'],
-				job: ['Web Developer', false, 'Job Title'],
+				job: ['Web Developer', false, 'Profession'],
 				desc: [`Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
 				Proin id placerat est. Mauris sed lacus mi. Ut vel mattis purus. 
-				Suspendisse mollis tincidunt arcu a vehicula.`, false, 'Short Description'],
+				Suspendisse mollis tincidunt arcu a vehicula.`, false, 'Short Description about yourself.'],
 			},
 			generalLink: {
 				mail: ['john.doe@mail.com', false, 'mail@mail.com'],
@@ -427,21 +427,21 @@ class App extends React.Component {
 				company: ['Some Company SA', false, 'Company Name'],
 				date: ['2021 - 2022', false, 'Working date'],
 				location: ['New York, USA', false, 'City, Country'],
-				tasks: [['Task1', 'Task2'], false],
+				tasks: [['Main Task 1', 'Main Task2'], false],
 			}, {
 				jobTitle: ['Associate R&D specialist', false, 'Job Title'],
 				company: ['Some Company SA', false, 'Company Name'],
 				date: ['2015 - 2021', false, 'Working date'],
 				location: ['New York, USA', false, 'City, Country'],
-				tasks: [['Task3', 'Task4'], false],
+				tasks: [['Main Task 1', 'Main Task2'], false],
 			},
 			],
 			education: [{
-				eduTitle: ['Bachelor of Engineering', false, 'School Title'],
+				eduTitle: ['Bachelor of Engineering', false, 'Diploma Title'],
 				school: ['National School of Engineering, Chicago', false, 'School Name'],
 				date: ['2014 - 2015', false, 'Schooling date'],
 			}, {
-				eduTitle: ['Car Mechanician', false, 'School Title'],
+				eduTitle: ['Car Mechanician', false, 'Diploma Title'],
 				school: ['Mechanical School of Chicago', false, 'School Name'],
 				date: ['2011 - 2014', false, 'Schooling date'],
 			},
@@ -455,7 +455,7 @@ class App extends React.Component {
 		const root = document.querySelector('#root'); // Get root element
 
 		root.addEventListener('keydown', (e => {
-			// When user is editing a field, if he press enter, the field is validated. 
+			// When user is editing a field, if he press enter, the field is saved. 
 			if (e.key === 'Enter') {
 				const input = document.querySelector('[field-input]');
 				const fieldName = input.getAttribute('field-input'); // Get name of field being modified
@@ -505,6 +505,11 @@ class App extends React.Component {
 						onAddEducation={ this.education.addEducation } onDeleteEducation={ this.education.deleteEducation }
 					/>
 	  		</div>
+			  <a href="https://github.com/zellko/top-cv-application">
+					<svg viewBox="0 0 24 24">
+						<path fill="currentColor" d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z" />
+					</svg>
+				</a>
 	  	</div>
 	  );
 	}
