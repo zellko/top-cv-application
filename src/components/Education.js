@@ -2,38 +2,36 @@ import React from 'react';
 import { EditInput } from './EditInput';
 import '../styles/Education.css';
 
-class Education extends React.Component{
+const Education = (props) => {
 
-	render(){
+	const renderField= (n, field, workObject) => {
+		// Render text field or edit field
+		let isEdit =  props.educationList[n][field][1];
 
-		const renderField= (n, field, workObject) => {
-			// Render text field or edit field
-		    let isEdit = this.props.educationList[n][field][1];
+		if (isEdit) {
+			return <EditInput field={ field } section="education" educationid={ n } value={ workObject[field][0] } onButtonClicked={ props.onSaveClick}  onInputChange={ props.onInput} />;
+		} else {
+			  return <p iseditable='true' field={ field } section="education" educationid={ n }  onClick={ props.onFieldClick}> { workObject[field][0] } </p>;
+	  }
+	};
 
-		    if (isEdit) {
-				return <EditInput field={ field } section="education" educationid={ n } value={ workObject[field][0] } onButtonClicked={this.props.onSaveClick}  onInputChange={this.props.onInput} />;
-			} else {
-		  		return <p iseditable='true' field={ field } section="education" educationid={ n }  onClick={this.props.onFieldClick}> { workObject[field][0] } </p>;
-		  }
-		};
-
-		return(
-			<div className='education-container'>
-				{this.props.educationList.map((education, educationIndex)=>{
-					{return(
-						<div className='education' educationid = { educationIndex } key={ educationIndex.toString()}>
-							{ renderField(educationIndex, 'eduTitle', education) }
-							{ renderField(educationIndex, 'school', education) }
-							{ renderField(educationIndex, 'date', education) }
-							<button educationid = { educationIndex } onClick={this.props.onDeleteEducation}>✕</button>
-						</div>
-					);
-					}
-				})}
-				<button onClick={this.props.onAddEducation}>✚ Education</button>			
-			</div>
-		);
-	}
-}
+	return(
+		<div className='education-container'>
+			{ props.educationList.map((education, educationIndex)=>{
+				{return(
+					<div className='education' educationid = { educationIndex } key={ educationIndex.toString()}>
+						{ renderField(educationIndex, 'eduTitle', education) }
+						{ renderField(educationIndex, 'school', education) }
+						{ renderField(educationIndex, 'date', education) }
+						<button educationid = { educationIndex } onClick={ props.onDeleteEducation}>✕</button>
+					</div>
+				);
+				}
+			})}
+			<button onClick={ props.onAddEducation}>✚ Education</button>			
+		</div>
+	);
+	
+};
 
 export { Education };

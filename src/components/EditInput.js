@@ -1,4 +1,5 @@
-import React from 'react';
+import userEvent from '@testing-library/user-event';
+import React, {useEffect} from 'react';
 import '../styles/EditInput.css';
 
 
@@ -11,38 +12,36 @@ The field is hidden, and instead of it, an input or textarea is displayed,
 to let the user enter a new value. 
 ****************************************************************************************/
 
-class EditInput extends React.Component{
-
-	componentDidMount(){
+const EditInput = (props) => {
+	useEffect(()=>{
 		// Focus input or textarea field when this component is rendered.
 		const input = document.querySelector('input');
 		const textarea = document.querySelector('textarea');
 		if (input) input.focus();
 		if (textarea) textarea.focus();
+	}, []);
+
+	const renderInputOrTextArea = () => {
+		// If the field to be edited is the description "desc" field...
+		// ... a textarea will be showed instead of a input.
+
+		if (props.field === 'desc') {
+			let textValue =  props.value;
+			textValue = textValue.replace(/\s+/g, ' ').trim();
+
+			return <textarea field-input={ props.field} section={ props.section} workid={ props.workid} educationid={ props.educationid} rows="4" cols="50" defaultValue={textValue} onChange={ props.onInputChange}></textarea>;
+		} else {
+			return <input field-input={ props.field} section={ props.section} workid={ props.workid} educationid={ props.educationid} defaultValue={ props.value} onChange={ props.onInputChange}></input>;
+		}
 	};
 
-	render(){
-		const renderInputOrTextArea = () => {
-			// If the field to be edited is the description "desc" field...
-			// ... a textarea will be showed instead of a input.
 
-			if (this.props.field === 'desc') {
-				let textValue = this.props.value;
-				textValue = textValue.replace(/\s+/g, ' ').trim();
-
-				return <textarea field-input={this.props.field} section={this.props.section} workid={this.props.workid} educationid={this.props.educationid} rows="4" cols="50" defaultValue={textValue} onChange={this.props.onInputChange}></textarea>;
-			} else {
-				return <input field-input={this.props.field} section={this.props.section} workid={this.props.workid} educationid={this.props.educationid} defaultValue={this.props.value} onChange={this.props.onInputChange}></input>;
-			}
-		};
-		
-		return(
-			<div className='edit-input'>
-				{renderInputOrTextArea()}
-				<button onClick={this.props.onButtonClicked}>Save</button>
-			</div>
-		);
-	}
-}
+	return(
+		<div className='edit-input'>
+			{renderInputOrTextArea()}
+			<button onClick={ props.onButtonClicked}>Save</button>
+		</div>
+	);
+};
 
 export { EditInput };
