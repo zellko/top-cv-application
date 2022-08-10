@@ -1,4 +1,4 @@
-# top-battleship
+# CV Application
 The Odin Project - JavaScript - Project: CV Application
 
 ## ToDo:
